@@ -12,7 +12,7 @@ const users = {
         roles: ['admin'],
         introduction: '超级管理员',
         avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-        name: 'dashboard - 首页，超级管理员',
+        name: '工作台 - 角色 => 超级管理员',
     },
     'editor-token': {
         roles: ['editor'],
