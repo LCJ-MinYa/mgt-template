@@ -56,7 +56,9 @@ export const constantRoutes = [
             },
         ],
     },
+];
 
+export const asyncRoutes = [
     {
         path: '/example',
         component: Layout,
