@@ -10,19 +10,19 @@ const exampleRouter = {
         {
             path: 'table',
             name: 'Table',
-            component: () => import('@/views/table/index'),
+            component: () => import('@/views/example/table/index'),
             meta: { title: '表格', icon: 'table' },
         },
         {
             path: 'tree',
             name: 'Tree',
-            component: () => import('@/views/tree/index'),
+            component: () => import('@/views/example/tree/index'),
             meta: { title: '树形控件', icon: 'tree' },
         },
         {
             path: 'form',
             name: 'Form',
-            component: () => import('@/views/form/index'),
+            component: () => import('@/views/example/form/index'),
             meta: { title: '表单', icon: 'form' },
         },
         {
@@ -32,35 +32,35 @@ const exampleRouter = {
                 title: '嵌套路由',
                 icon: 'nested',
             },
-            component: () => import('@/views/nested/index'),
+            component: () => import('@/views/example/nested/index'),
             children: [
                 {
                     path: 'menu1',
-                    component: () => import('@/views/nested/menu1/index'), // Parent router-view
+                    component: () => import('@/views/example/nested/menu1/index'), // Parent router-view
                     name: 'Menu1',
                     meta: { title: '菜单1' },
                     children: [
                         {
                             path: 'menu1-1',
-                            component: () => import('@/views/nested/menu1/menu1-1'),
+                            component: () => import('@/views/example/nested/menu1/menu1-1'),
                             name: 'Menu1-1',
                             meta: { title: '菜单1-1' },
                         },
                         {
                             path: 'menu1-2',
-                            component: () => import('@/views/nested/menu1/menu1-2'),
+                            component: () => import('@/views/example/nested/menu1/menu1-2'),
                             name: 'Menu1-2',
                             meta: { title: '菜单1-2' },
                             children: [
                                 {
                                     path: 'menu1-2-1',
-                                    component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+                                    component: () => import('@/views/example/nested/menu1/menu1-2/menu1-2-1'),
                                     name: 'Menu1-2-1',
                                     meta: { title: '菜单1-2-1' },
                                 },
                                 {
                                     path: 'menu1-2-2',
-                                    component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+                                    component: () => import('@/views/example/nested/menu1/menu1-2/menu1-2-2'),
                                     name: 'Menu1-2-2',
                                     meta: { title: '菜单1-2-2' },
                                 },
@@ -68,7 +68,7 @@ const exampleRouter = {
                         },
                         {
                             path: 'menu1-3',
-                            component: () => import('@/views/nested/menu1/menu1-3'),
+                            component: () => import('@/views/example/nested/menu1/menu1-3'),
                             name: 'Menu1-3',
                             meta: { title: '菜单1-3' },
                         },
@@ -76,7 +76,7 @@ const exampleRouter = {
                 },
                 {
                     path: 'menu2',
-                    component: () => import('@/views/nested/menu2/index'),
+                    component: () => import('@/views/example/nested/menu2/index'),
                     name: 'Menu2',
                     meta: { title: '菜单2' },
                 },

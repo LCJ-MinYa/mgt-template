@@ -1,0 +1,40 @@
+.base-table {
+    .search-btn-box {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+    }
+
+    .table-empty-box {
+        padding: 50px;
+        color: rgba(0, 0, 0, 0.25);
+
+        i {
+            display: block;
+            font-size: 50px;
+        }
+    }
+}
+
+::v-deep .el-input input,
+::v-deep .el-select input {
+    border-radius: 20px;
+}
+
+::v-deep .date-picker-select {
+    input {
+        border-radius: 20px 0 0 20px !important;
+        border-right: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+::v-deep .el-range-editor {
+    border-radius: 0 20px 20px 0;
+}
+
+::v-deep .table-header-cell {
+    background: #fafafa;
+}

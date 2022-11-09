@@ -1,3 +1,5 @@
+@import './flex.css';
+@import './tail.css';
 @import './variables.scss';
 @import './mixin.scss';
 @import './transition.scss';
@@ -57,11 +59,6 @@ div:focus {
         clear: both;
         height: 0;
     }
-}
-
-// main-container global css
-.app-container {
-    padding: 20px;
 }
 
 /* firfox scrollbar */
