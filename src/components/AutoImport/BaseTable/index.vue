@@ -94,7 +94,7 @@
                 </template>
                 <template v-if="!$props.emptyText" slot="empty">
                     <div class="table-empty-box">
-                        <i class="el-icon-files" />
+                        <i class="mgtfont mgt-Inbox" />
                         <span>暂无数据</span>
                     </div>
                 </template>
@@ -118,7 +118,7 @@
 /* eslint-disable */
 import SearchFormItem from './components/searchFormItem.vue';
 import { sortBy, cloneDeep, isEmpty, pickBy } from 'lodash';
-import { props, computedSearchConfigParams, computedGoOtherPageConfigParams, getFormItemProperty } from './index.js';
+import { DATE_ALIAS, props, computedSearchConfigParams, computedGoOtherPageConfigParams, getFormItemProperty } from './index.js';
 export default {
     name: 'BaseTable',
     components: {
@@ -270,7 +270,7 @@ export default {
                         this.searchForm[this.getFormItemProperty(item)] = item.searchConfig.initialValue;
                     }
                     if (item.searchConfig.initialSelectValue) {
-                        this.searchForm[`${getFormItemProperty(item)}Date`] = item.searchConfig.initialSelectValue;
+                        this.searchForm[`${this.getFormItemProperty(item)}${DATE_ALIAS}`] = item.searchConfig.initialSelectValue;
                     }
                 });
                 this.searchForm = cloneDeep(this.searchForm);
@@ -320,8 +320,6 @@ export default {
             }
         },
         onSearch() {
-            console.log(this.searchForm);
-            console.log(this.generateParams());
             this.initPageParams(true);
             this.requestData();
 
@@ -351,10 +349,26 @@ export default {
                 });
             }
         },
+        filterSearchForm(searchForm) {
+            const needFilterArr = [];
+            Object.keys(searchForm).map((item) => {
+                if (item.indexOf(DATE_ALIAS) > -1) {
+                    needFilterArr.push(item);
+                    needFilterArr.push(item.split(DATE_ALIAS)[0]);
+                }
+            });
+            for (const key in searchForm) {
+                if (needFilterArr.includes(key)) {
+                    delete searchForm[key];
+                }
+            }
+        },
         generateSearchData() {
-            this.generatePickerArr(this.searchForm, 'datePicker', 'startDate', 'endDate');
-            this.generatePickerArr(this.searchForm, 'monthPicker', 'startMonth', 'endMonth');
-            return this.searchForm;
+            const searchForm = cloneDeep(this.searchForm);
+            this.generatePickerArr(searchForm, 'datePicker', 'startDate', 'endDate');
+            this.generatePickerArr(searchForm, 'monthPicker', 'startMonth', 'endMonth');
+            this.filterSearchForm(searchForm);
+            return searchForm;
         },
         generateParams() {
             const { currentPage, pageSize } = this.tablePageParams;

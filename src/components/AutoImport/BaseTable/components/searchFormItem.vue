@@ -30,10 +30,10 @@
 
     <!-- datePicker 时间选择框 -->
     <span v-else-if="item.searchType === 'datePicker'">
-        <el-form-item style="margin-right: 0;" :prop="`${getFormItemProperty(item)}Date`">
+        <el-form-item style="margin-right: 0;" :prop="`${getFormItemProperty(item)}${DATE_ALIAS}`">
             <el-select
-                v-model="searchForm[`${getFormItemProperty(item)}Date`]"
-                :ref="`${getFormItemProperty(item)}Date`"
+                v-model="searchForm[`${getFormItemProperty(item)}${DATE_ALIAS}`]"
+                :ref="`${getFormItemProperty(item)}${DATE_ALIAS}`"
                 class="date-picker-select"
                 style="width: 100px;"
                 @change="(value) => changeDatePickerValue(value, item)"
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { getFormItemProperty, switchDate } from '../index.js';
+import { DATE_ALIAS, getFormItemProperty, switchDate } from '../index.js';
 
 export default {
     name: 'SearchFormItem',
@@ -83,6 +83,7 @@ export default {
     data() {
         return {
             getFormItemProperty,
+            DATE_ALIAS,
         };
     },
     methods: {
@@ -105,7 +106,7 @@ export default {
             this.searchForm[getFormItemProperty(item)] = switchDate(value);
         },
         datePickerSelectBlur(value, item) {
-            !value && this.$refs[`${getFormItemProperty(item)}Date`].blur();
+            !value && this.$refs[`${getFormItemProperty(item)}${DATE_ALIAS}`].blur();
         },
     },
 };

@@ -124,7 +124,7 @@ export default {
                                 value: 'month',
                             },
                         ],
-                        dateConfig: ['createTimeStart', 'createTimeEnd'],
+                        dateConfig: ['customDateStart', 'customDateEnd'],
                     },
                 },
             ],

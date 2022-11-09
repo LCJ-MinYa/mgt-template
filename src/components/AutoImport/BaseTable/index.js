@@ -1,6 +1,8 @@
 import { Table } from 'element-ui';
 import dayjs from 'dayjs';
 
+const DATE_ALIAS = '=>initDate';
+
 const props = {
     ...Table.props,
     /** cardStyle是否显示 */
@@ -167,4 +169,4 @@ const switchDate = (value) => {
     return dateValue;
 };
 
-export { props, computedSearchConfigParams, computedGoOtherPageConfigParams, getFormItemProperty, switchDate };
+export { DATE_ALIAS, props, computedSearchConfigParams, computedGoOtherPageConfigParams, getFormItemProperty, switchDate };
