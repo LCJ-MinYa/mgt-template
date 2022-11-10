@@ -16,25 +16,25 @@
     }
 }
 
-::v-deep .el-input input,
-::v-deep .el-select input {
-    border-radius: 20px;
-}
+// ::v-deep .el-input input,
+// ::v-deep .el-select input {
+//     border-radius: 20px;
+// }
 
-::v-deep .date-picker-select {
-    input {
-        border-radius: 20px 0 0 20px !important;
-        border-right: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-}
+// ::v-deep .date-picker-select {
+//     input {
+//         border-radius: 20px 0 0 20px !important;
+//         border-right: 0;
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+//         white-space: nowrap;
+//     }
+// }
 
-::v-deep .el-range-editor {
-    border-radius: 0 20px 20px 0;
-}
+// ::v-deep .el-range-editor {
+//     border-radius: 0 20px 20px 0;
+// }
 
-::v-deep .table-header-cell {
-    background: #fafafa;
-}
+// ::v-deep .table-header-cell {
+//     background: #fafafa;
+// }

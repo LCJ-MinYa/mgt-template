@@ -28,6 +28,11 @@ if (process.env.NODE_ENV === 'production') {
     mockXHR();
 }
 
+/** 设置ElementUI全局默认属性 */
+ElementUI.Button.props.round = {
+    type: Boolean,
+    default: true,
+};
 Vue.use(ElementUI);
 Vue.use(AutoImportComponents);
 

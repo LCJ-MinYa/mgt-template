@@ -215,6 +215,7 @@ export default {
             cursor: pointer;
             height: 26px;
             line-height: 26px;
+            border-radius: 8px;
             border: 1px solid #d8dce5;
             color: #495060;
             background: #fff;

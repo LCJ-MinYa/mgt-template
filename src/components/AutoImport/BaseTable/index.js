@@ -39,6 +39,11 @@ const props = {
         type: Boolean,
         default: false,
     },
+    /** table搜索第一行显示几个，默认只显示一个 */
+    searchFirstLine: {
+        type: Number,
+        default: 1,
+    },
     /** table搜索的配置 */
     searchConfig: {
         type: Object,

@@ -9,33 +9,35 @@
                 :model="searchForm"
             >
                 <el-row type="flex" justify="space-between">
-                    <el-col :span="16">
+                    <el-col :span="20">
                         <el-form-item
-                            v-for="item in searchColumns.filter((columnItem, index) => index === 0)"
+                            v-for="(item, index) in searchColumns.filter((columnItem, index) => index <= (this.searchFirstLine - 1))"
                             :key="item.prop"
                             :label="getFormItemProperty(item, 'label')"
                             :prop="getFormItemProperty(item)"
                             :label-width="getFormItemProperty(item, 'labelWidth') || searchConfigParams.labelWidth"
                         >
-                            <search-form-item :item="item" :searchForm="searchForm" isFirstItem />
+                            <search-form-item
+                                :item="item"
+                                :searchForm="searchForm"
+                                :isFirstItem="index === 0 && searchFirstLine === 1"
+                            />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="8" class="search-btn-box">
+                    <el-col :span="4" class="search-btn-box">
                         <el-button
                             type="primary"
-                            round
                             @click="onSearch"
                             v-if="searchConfigParams.searchVisible"
                         >{{ searchConfigParams.searchText }}</el-button>
                         <el-button
-                            round
                             v-if="searchConfigParams.resetVisible"
                             @click="onReset"
                         >{{ searchConfigParams.resetText }}</el-button>
                     </el-col>
                 </el-row>
                 <el-form-item
-                    v-for="item in searchColumns.filter((columnItem, index) => index > 0)"
+                    v-for="item in searchColumns.filter((columnItem, index) => index > this.searchFirstLine - 1)"
                     :key="item.prop"
                     :label="getFormItemProperty(item, 'label')"
                     :prop="getFormItemProperty(item)"

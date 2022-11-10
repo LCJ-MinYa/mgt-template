@@ -9,6 +9,7 @@ const data = Mock.mock({
             author: 'name',
             display_time: '@datetime',
             pageviews: '@integer(300, 5000)',
+            audit_time: '@datetime',
         },
     ],
 });

@@ -3,6 +3,7 @@
         <base-table
             ref="table"
             search
+            :searchFirstLine="3"
             showSerialNumber
             :request-api="getList"
             :columns="columns"
@@ -13,9 +14,9 @@
                 slot-scope="{ row }"
                 :type="row.status | statusFilter"
             >{{ row.status }}</el-tag>
-            <template slot="display_time" slot-scope="{ row }">
+            <template slot="display_time" slot-scope="{ text }">
                 <i class="el-icon-time pr-5" />
-                <span>{{ row.display_time }}</span>
+                <span>{{ text }}</span>
             </template>
         </base-table>
     </base-container>
@@ -42,7 +43,7 @@ export default {
                 {
                     label: '标题',
                     prop: 'title',
-                    width: 600,
+                    width: 500,
                     searchType: 'input',
                     searchOrder: 1,
                     searchConfig: {
@@ -95,7 +96,7 @@ export default {
                     prop: 'display_time',
                     slotName: 'display_time',
                     searchType: 'datePicker',
-                    searchOrder: 8,
+                    searchOrder: 3,
                     searchConfig: {
                         initialSelectValue: 'all',
                         selectEnum: [
@@ -125,6 +126,31 @@ export default {
                             },
                         ],
                         dateConfig: ['customDateStart', 'customDateEnd'],
+                    },
+                },
+                {
+                    label: '审核时间',
+                    prop: 'audit_time',
+                    slotName: 'display_time',
+                    searchType: 'datePicker',
+                    searchOrder: 4,
+                    searchConfig: {
+                        initialSelectValue: 'all',
+                        selectEnum: [
+                            {
+                                label: '全部',
+                                value: 'all',
+                            },
+                            {
+                                label: '今天',
+                                value: '0,0',
+                            },
+                            {
+                                label: '昨天',
+                                value: '-1,-1',
+                            },
+                        ],
+                        dateConfig: ['auditDateStart', 'auditDateEnd'],
                     },
                 },
             ],
