@@ -33,6 +33,11 @@ ElementUI.Button.props.round = {
     type: Boolean,
     default: true,
 };
+ElementUI.Card.props.shadow = {
+    type: String,
+    default: 'never',
+};
+
 Vue.use(ElementUI);
 Vue.use(AutoImportComponents);
 
