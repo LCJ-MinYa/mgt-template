@@ -162,10 +162,12 @@ const switchDate = (value) => {
             dateValue = [];
             break;
         case 'week':
-            dateValue = [dayjs().startOf('week'), dayjs().endOf('week')];
+            dateValue = [dayjs().startOf(value).add(1, 'day'), dayjs().endOf(value).add(1, 'day')];
             break;
+        case 'day':
         case 'month':
-            dateValue = [dayjs().startOf('month'), dayjs().endOf('month')];
+        case 'year':
+            dateValue = [dayjs().startOf(value), dayjs().endOf(value)];
             break;
     }
     if (dateValue.length) {

@@ -40,7 +40,7 @@
                 @visible-change="(value) => datePickerSelectBlur(value, item)"
             >
                 <el-option
-                    v-for="(selectItem, index) in item.searchConfig.selectEnum || []"
+                    v-for="(selectItem, index) in item.searchConfig.selectEnum || defaultSelectEnum"
                     :key="index"
                     :label="selectItem[getFormItemProperty(item, 'selectLabel') || 'label']"
                     :value="selectItem[getFormItemProperty(item, 'selectValue') || 'value']"
@@ -84,6 +84,20 @@ export default {
         return {
             getFormItemProperty,
             DATE_ALIAS,
+            defaultSelectEnum: [
+                {
+                    label: '今天',
+                    value: 'day',
+                },
+                {
+                    label: '本周',
+                    value: 'week',
+                },
+                {
+                    label: '本月',
+                    value: 'month',
+                },
+            ],
         };
     },
     methods: {

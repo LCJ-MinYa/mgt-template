@@ -258,6 +258,23 @@ export default {
         },
         /** 初始化表单默认值 */
         initialFormValue() {
+            /** 初始化表单内所有字段 */
+            this.tableColumns.forEach((item) => {
+                switch (item.searchType) {
+                    case 'input':
+                    case 'select':
+                        this.searchForm[getFormItemProperty(item)] = '';
+                        break;
+                    case 'datePicker':
+                        this.searchForm[getFormItemProperty(item)] = [];
+                        break;
+                    default:
+                        this.searchForm[getFormItemProperty(item)] = '';
+                        break;
+                }
+            });
+
+            /** 初始化表单内有初始值的字段 */
             const initialValueArr = this.tableColumns.filter((item) => {
                 return (
                     item.searchType &&
@@ -269,14 +286,14 @@ export default {
             if (initialValueArr.length) {
                 initialValueArr.forEach((item) => {
                     if (item.searchConfig.initialValue || item.searchConfig.initialValue == 0) {
-                        this.searchForm[this.getFormItemProperty(item)] = item.searchConfig.initialValue;
+                        this.searchForm[getFormItemProperty(item)] = item.searchConfig.initialValue;
                     }
                     if (item.searchConfig.initialSelectValue) {
-                        this.searchForm[`${this.getFormItemProperty(item)}${DATE_ALIAS}`] = item.searchConfig.initialSelectValue;
+                        this.searchForm[`${getFormItemProperty(item)}${DATE_ALIAS}`] = item.searchConfig.initialSelectValue;
                     }
                 });
-                this.searchForm = cloneDeep(this.searchForm);
             }
+            this.searchForm = cloneDeep(this.searchForm);
         },
         initPageParams(initCurrentPage = false) {
             if (initCurrentPage) {
@@ -333,7 +350,7 @@ export default {
             const datePickerArr = this.searchColumns.filter((item) => item.searchType === searchType);
             if (!isEmpty(searchData) && datePickerArr.length) {
                 datePickerArr.map((item) => {
-                    const itemKey = this.getFormItemProperty(item);
+                    const itemKey = getFormItemProperty(item);
                     for (const key in searchData) {
                         if (!searchData[key]) {
                             continue;
@@ -346,6 +363,7 @@ export default {
                                 searchData[customStartName] = searchData[key][0];
                                 searchData[customEndName] = searchData[key][1];
                             }
+                            delete searchData[key];
                         }
                     }
                 });
@@ -356,7 +374,6 @@ export default {
             Object.keys(searchForm).map((item) => {
                 if (item.indexOf(DATE_ALIAS) > -1) {
                     needFilterArr.push(item);
-                    needFilterArr.push(item.split(DATE_ALIAS)[0]);
                 }
             });
             for (const key in searchForm) {

@@ -135,21 +135,6 @@ export default {
                     searchType: 'datePicker',
                     searchOrder: 4,
                     searchConfig: {
-                        initialSelectValue: 'all',
-                        selectEnum: [
-                            {
-                                label: '全部',
-                                value: 'all',
-                            },
-                            {
-                                label: '今天',
-                                value: '0,0',
-                            },
-                            {
-                                label: '昨天',
-                                value: '-1,-1',
-                            },
-                        ],
                         dateConfig: ['auditDateStart', 'auditDateEnd'],
                     },
                 },
