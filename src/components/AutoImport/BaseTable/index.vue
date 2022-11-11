@@ -409,15 +409,15 @@ export default {
                 .then((result) => {
                     this.tableLoading = false;
 
-                    const { list = [], total = 0 } = result.data || {};
+                    const { list = [], total = 0 } = result || {};
                     const dealList = this.addSerialNumberToDataSource(list);
                     this.tableDataSource = dealList;
                     this.tablePageParams.total = total;
                     if (this.$listeners.parentEvent) {
-                        this.$emit('parentEvent', 'requestData', result.data);
+                        this.$emit('parentEvent', 'requestData', result);
                     }
                 })
-                .catch(() => (this.tableLoading = false));
+                .finally(() => (this.tableLoading = false));
         },
         toRouter(record) {
             const { keyName, extraKeyName, routeAddress, extraQueryParams } = this.goOtherPageConfigParams;
