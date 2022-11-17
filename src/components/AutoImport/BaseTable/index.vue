@@ -120,7 +120,14 @@
 /* eslint-disable */
 import SearchFormItem from './components/searchFormItem.vue';
 import { sortBy, cloneDeep, isEmpty, pickBy } from 'lodash';
-import { DATE_ALIAS, props, computedSearchConfigParams, computedGoOtherPageConfigParams, getFormItemProperty } from './index.js';
+import {
+    DATE_ALIAS,
+    props,
+    computedSearchConfigParams,
+    computedGoOtherPageConfigParams,
+    getFormItemProperty,
+    defaultDatePickerWithSelectEnum,
+} from './index.js';
 export default {
     name: 'BaseTable',
     components: {
@@ -193,6 +200,7 @@ export default {
                 this.tableColumns = this.addSerialNumberToColumns(val);
                 this.tableColumns = this.addConfigToColumns(this.tableColumns);
                 this.initialFormValue();
+                this.requestRemoteSelect();
             },
         },
         data: {
@@ -266,6 +274,7 @@ export default {
                         this.searchForm[getFormItemProperty(item)] = '';
                         break;
                     case 'datePicker':
+                        this.searchForm[`${getFormItemProperty(item)}${DATE_ALIAS}`] = defaultDatePickerWithSelectEnum[0].value;
                         this.searchForm[getFormItemProperty(item)] = [];
                         break;
                     default:
@@ -294,6 +303,17 @@ export default {
                 });
             }
             this.searchForm = cloneDeep(this.searchForm);
+        },
+        /** 处理select远程搜索 */
+        requestRemoteSelect() {
+            /** 获取需要进行远程搜索的select */
+            const needRemoteArr = this.tableColumns.filter((item) => {
+                return item.searchType === 'select' && item.searchConfig && typeof item.searchConfig.selectEnumFun === 'function';
+            });
+
+            Promise.all(needRemoteArr.map((item) => item.searchConfig.selectEnumFun())).then((result) => {
+                result.forEach((res, index) => (needRemoteArr[index].searchConfig.selectEnum = res));
+            });
         },
         initPageParams(initCurrentPage = false) {
             if (initCurrentPage) {

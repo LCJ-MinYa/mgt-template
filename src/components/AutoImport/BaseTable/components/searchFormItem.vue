@@ -9,7 +9,7 @@
         autocomplete="off"
         style="width: 200px;"
         placeholder="请输入"
-        v-bind="doBindComponentConfig(item.searchConfig.componentConfig)"
+        v-bind="doBindComponentConfig(item)"
     />
 
     <!-- select 选择框 -->
@@ -18,10 +18,10 @@
         v-model="searchForm[getFormItemProperty(item)]"
         clearable
         placeholder="请选择"
-        v-bind="doBindComponentConfig(item.searchConfig.componentConfig)"
+        v-bind="doBindComponentConfig(item)"
     >
         <el-option
-            v-for="selectItem in item.searchConfig.selectEnum || []"
+            v-for="selectItem in item.searchConfig && item.searchConfig.selectEnum || []"
             :key="selectItem[getFormItemProperty(item, 'selectValue') || 'value']"
             :label="selectItem[getFormItemProperty(item, 'selectLabel') || 'label']"
             :value="selectItem[getFormItemProperty(item, 'selectValue') || 'value']"
@@ -40,7 +40,7 @@
                 @visible-change="(value) => datePickerSelectBlur(value, item)"
             >
                 <el-option
-                    v-for="(selectItem, index) in item.searchConfig.selectEnum || defaultSelectEnum"
+                    v-for="(selectItem, index) in item.searchConfig && item.searchConfig.selectEnum || defaultDatePickerWithSelectEnum"
                     :key="index"
                     :label="selectItem[getFormItemProperty(item, 'selectLabel') || 'label']"
                     :value="selectItem[getFormItemProperty(item, 'selectValue') || 'value']"
@@ -55,14 +55,14 @@
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
-                v-bind="doBindComponentConfig(item.searchConfig.componentConfig)"
+                v-bind="doBindComponentConfig(item)"
             />
         </el-form-item>
     </span>
 </template>
 
 <script>
-import { DATE_ALIAS, getFormItemProperty, switchDate } from '../index.js';
+import { DATE_ALIAS, getFormItemProperty, switchDate, defaultDatePickerWithSelectEnum } from '../index.js';
 
 export default {
     name: 'SearchFormItem',
@@ -84,25 +84,13 @@ export default {
         return {
             getFormItemProperty,
             DATE_ALIAS,
-            defaultSelectEnum: [
-                {
-                    label: '今天',
-                    value: 'day',
-                },
-                {
-                    label: '本周',
-                    value: 'week',
-                },
-                {
-                    label: '本月',
-                    value: 'month',
-                },
-            ],
+            defaultDatePickerWithSelectEnum,
         };
     },
     methods: {
         /** 设置组件属性 */
-        doBindComponentConfig(config, defaultConfig = {}) {
+        doBindComponentConfig(item, defaultConfig = {}) {
+            let config = item.searchConfig && item.searchConfig.componentConfig;
             /** 默认第一个组件宽度设置400px,其他200px */
             if (this.isFirstItem) {
                 defaultConfig.style = {

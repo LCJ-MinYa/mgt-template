@@ -24,6 +24,7 @@
 
 <script>
 import { getList } from '@/api/table';
+import { getSelect1Enum } from '@/api/enum';
 
 export default {
     filters: {
@@ -58,8 +59,8 @@ export default {
                     searchConfig: {
                         labelWidth: '100px',
                         initialValue: -1,
-                        label: '测试下拉选择',
-                        prop: 'testSelect',
+                        label: '静态select',
+                        prop: 'localSelect',
                         selectLabel: 'cardTypeName',
                         selectValue: 'cardType',
                         selectEnum: [
@@ -69,15 +70,15 @@ export default {
                             },
                             {
                                 cardType: 1,
-                                cardTypeName: '下拉选择1',
+                                cardTypeName: '静态select1',
                             },
                             {
                                 cardType: 2,
-                                cardTypeName: '下拉选择2',
+                                cardTypeName: '静态select2',
                             },
                             {
                                 cardType: 3,
-                                cardTypeName: '下拉选择3',
+                                cardTypeName: '静态select3',
                             },
                         ],
                     },
@@ -90,6 +91,19 @@ export default {
                     label: '状态',
                     prop: 'status',
                     slotName: 'status',
+                    searchType: 'select',
+                    searchOrder: 2,
+                    searchConfig: {
+                        labelWidth: '100px',
+                        label: '远程select',
+                        prop: 'remoteSelect',
+                        selectLabel: 'select1Lable',
+                        selectValue: 'select1Value',
+                        selectEnum: [],
+                        /** 带参数与不带参数 */
+                        // selectEnumFun: this.getSelect1Enum,
+                        selectEnumFun: () => this.getSelect1Enum({ test: 1 }),
+                    },
                 },
                 {
                     label: '发布时间',
@@ -98,7 +112,8 @@ export default {
                     searchType: 'datePicker',
                     searchOrder: 3,
                     searchConfig: {
-                        initialSelectValue: 'all',
+                        initialValue: ['2022-11-01', '2022-11-30'],
+                        initialSelectValue: 'month',
                         selectEnum: [
                             {
                                 label: '全部',
@@ -143,6 +158,7 @@ export default {
     },
     methods: {
         getList,
+        getSelect1Enum,
     },
 };
 </script>

@@ -176,4 +176,31 @@ const switchDate = (value) => {
     return dateValue;
 };
 
-export { DATE_ALIAS, props, computedSearchConfigParams, computedGoOtherPageConfigParams, getFormItemProperty, switchDate };
+const defaultDatePickerWithSelectEnum = [
+    {
+        label: '全部',
+        value: 'all',
+    },
+    {
+        label: '今天',
+        value: 'day',
+    },
+    {
+        label: '本周',
+        value: 'week',
+    },
+    {
+        label: '本月',
+        value: 'month',
+    },
+];
+
+export {
+    DATE_ALIAS,
+    props,
+    computedSearchConfigParams,
+    computedGoOtherPageConfigParams,
+    getFormItemProperty,
+    switchDate,
+    defaultDatePickerWithSelectEnum,
+};
