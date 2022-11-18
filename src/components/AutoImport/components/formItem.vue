@@ -5,7 +5,7 @@
     <!-- input 输入框 -->
     <el-input
         v-if="item.searchType === 'input'"
-        v-model="searchForm[getFormItemProperty(item)]"
+        v-model="form[getFormItemProperty(item)]"
         autocomplete="off"
         style="width: 200px;"
         placeholder="请输入"
@@ -15,7 +15,7 @@
     <!-- select 选择框 -->
     <el-select
         v-else-if="item.searchType === 'select'"
-        v-model="searchForm[getFormItemProperty(item)]"
+        v-model="form[getFormItemProperty(item)]"
         clearable
         placeholder="请选择"
         v-bind="doBindComponentConfig(item)"
@@ -29,10 +29,23 @@
     </el-select>
 
     <!-- datePicker 时间选择框 -->
-    <span v-else-if="item.searchType === 'datePicker'">
+    <el-form-item v-else-if="item.searchType === 'datePicker'" :prop="getFormItemProperty(item)">
+        <el-date-picker
+            v-model="form[getFormItemProperty(item)]"
+            type="daterange"
+            value-format="yyyy-MM-dd"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            v-bind="doBindComponentConfig(item)"
+        />
+    </el-form-item>
+
+    <!-- datePickerWithSelect 时间选择框带下拉选择项, 目前BaseTable独享 -->
+    <span v-else-if="item.searchType === 'datePickerWithSelect'">
         <el-form-item style="margin-right: 0;" :prop="`${getFormItemProperty(item)}${DATE_ALIAS}`">
             <el-select
-                v-model="searchForm[`${getFormItemProperty(item)}${DATE_ALIAS}`]"
+                v-model="form[`${getFormItemProperty(item)}${DATE_ALIAS}`]"
                 :ref="`${getFormItemProperty(item)}${DATE_ALIAS}`"
                 class="date-picker-select"
                 style="width: 100px;"
@@ -49,7 +62,8 @@
         </el-form-item>
         <el-form-item :prop="getFormItemProperty(item)">
             <el-date-picker
-                v-model="searchForm[getFormItemProperty(item)]"
+                class="with-select"
+                v-model="form[getFormItemProperty(item)]"
                 type="daterange"
                 value-format="yyyy-MM-dd"
                 range-separator="至"
@@ -62,10 +76,10 @@
 </template>
 
 <script>
-import { DATE_ALIAS, getFormItemProperty, switchDate, defaultDatePickerWithSelectEnum } from '../index.js';
+import { DATE_ALIAS, getFormItemProperty, switchDate, defaultDatePickerWithSelectEnum } from '@/components/AutoImport/BaseTable/index.js';
 
 export default {
-    name: 'SearchFormItem',
+    name: 'FormItem',
     props: {
         isFirstItem: {
             type: Boolean,
@@ -75,7 +89,7 @@ export default {
             type: Object,
             required: true,
         },
-        searchForm: {
+        form: {
             type: Object,
             required: true,
         },
@@ -105,7 +119,7 @@ export default {
                 : defaultConfig;
         },
         changeDatePickerValue(value, item) {
-            this.searchForm[getFormItemProperty(item)] = switchDate(value);
+            this.form[getFormItemProperty(item)] = switchDate(value);
         },
         datePickerSelectBlur(value, item) {
             !value && this.$refs[`${getFormItemProperty(item)}${DATE_ALIAS}`].blur();

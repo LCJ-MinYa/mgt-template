@@ -50,7 +50,8 @@
 /* 修改组件默认样式 */
 .el-input input,
 .el-select input,
-.el-textarea textarea {
+.el-textarea textarea,
+.el-range-editor {
     border-radius: 20px;
 }
 
@@ -62,10 +63,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-}
-
-.el-range-editor {
-    border-radius: 0 20px 20px 0;
 }
 
 .table-header-cell {

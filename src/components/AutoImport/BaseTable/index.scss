@@ -16,6 +16,10 @@
     }
 }
 
+::v-deep .el-range-editor.with-select {
+    border-radius: 0 20px 20px 0;
+}
+
 // ::v-deep .el-input input,
 // ::v-deep .el-select input {
 //     border-radius: 20px;

@@ -117,7 +117,7 @@ export default {
                     label: '发布时间',
                     prop: 'display_time',
                     slotName: 'display_time',
-                    searchType: 'datePicker',
+                    searchType: 'datePickerWithSelect',
                     searchOrder: 3,
                     searchConfig: {
                         initialValue: ['2022-11-01', '2022-11-30'],

@@ -19,7 +19,7 @@
                         >
                             <search-form-item
                                 :item="item"
-                                :searchForm="searchForm"
+                                :form="searchForm"
                                 :isFirstItem="index === 0 && searchFirstLine === 1"
                             />
                         </el-form-item>
@@ -43,7 +43,7 @@
                     :prop="getFormItemProperty(item)"
                     :label-width="getFormItemProperty(item, 'labelWidth') || searchConfigParams.labelWidth"
                 >
-                    <search-form-item :item="item" :searchForm="searchForm" />
+                    <search-form-item :item="item" :form="searchForm" />
                 </el-form-item>
             </el-form>
         </el-card>
@@ -118,7 +118,7 @@
 
 <script>
 import showMsgboxMixin from '@/mixins/showMsgbox';
-import SearchFormItem from './components/searchFormItem.vue';
+import SearchFormItem from '@/components/AutoImport/components/formItem.vue';
 import { sortBy, cloneDeep, isEmpty, pickBy } from 'lodash';
 import {
     DATE_ALIAS,
@@ -275,8 +275,11 @@ export default {
                     case 'select':
                         this.searchForm[getFormItemProperty(item)] = '';
                         break;
-                    case 'datePicker':
+                    case 'datePickerWithSelect':
                         this.searchForm[`${getFormItemProperty(item)}${DATE_ALIAS}`] = defaultDatePickerWithSelectEnum[0].value;
+                        this.searchForm[getFormItemProperty(item)] = [];
+                        break;
+                    case 'datePicker':
                         this.searchForm[getFormItemProperty(item)] = [];
                         break;
                     default:
