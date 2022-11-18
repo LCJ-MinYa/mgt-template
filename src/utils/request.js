@@ -8,7 +8,7 @@ const loginFailHttpCode = [401, 4000, 4001, 4002, 4003];
 
 // create an axios instance
 const service = axios.create({
-    baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+    baseURL: process.env.VUE_APP_BASE_API + process.env.VUE_APP_API_PREFIX, // url = base url + request url
     // withCredentials: true, // send cookies when cross-domain requests
     timeout: 5000, // request timeout
 });
@@ -52,14 +52,15 @@ service.interceptors.response.use(
             // 是否返回原始响应数据 showOriginData
             // 是否不显示任何错误信息 skipError
             config: { skipError = false, showOriginData = false },
-            data: { code, message, data = {} },
+            data: responseData,
         } = response;
+        const { code, message, data = {} } = responseData;
 
         // 报错信息显示
         if (!skipError) {
             if (!successHttpCode.includes(code)) {
                 loginFailHttpCode.includes(code) ? Message.error('登录已过期，请重新登录') : Message.error(message);
-                return Promise.reject(new Error(message || 'Error'));
+                return Promise.reject(message || 'Error');
             }
         }
 
@@ -72,7 +73,7 @@ service.interceptors.response.use(
 
         // 返回原始响应数据
         if (showOriginData) {
-            return response;
+            return responseData;
         }
 
         // 如果服务器返回的data字段为null，则返回空字符串，避免解构赋值默认值无法生效
@@ -127,4 +128,28 @@ service.interceptors.response.use(
     }
 );
 
-export default service;
+// http method
+const METHOD = {
+    GET: 'get',
+    POST: 'post',
+};
+
+/**
+ * axios请求
+ * @param url 请求地址
+ * @param method {METHOD} http method
+ * @param params 请求参数
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+async function request(url, method, params, config) {
+    switch (method) {
+        case METHOD.GET:
+            return service({ url, method, params: { ...params, ...config } });
+        case METHOD.POST:
+            return service({ url, method, params, ...config });
+        default:
+            return service({ url, method, params, ...config });
+    }
+}
+
+export { METHOD, request };

@@ -19,7 +19,7 @@ for (let i = 0; i < count; i++) {
 
 module.exports = [
     {
-        url: '/vue-admin-template/table/list',
+        url: '/mgt-template/table/list',
         type: 'get',
         response: (config) => {
             const { currentPage = 1, pageSize = 10 } = config.query;
@@ -33,6 +33,23 @@ module.exports = [
                     list: pageList,
                 },
             };
+        },
+    },
+    {
+        url: '/mgt-template/table/deleteItem',
+        type: 'post',
+        response: (config) => {
+            return config.query.id
+                ? {
+                      code: 200,
+                      data: true,
+                      message: '删除成功',
+                  }
+                : {
+                      code: 500,
+                      data: false,
+                      message: '删除失败',
+                  };
         },
     },
 ];

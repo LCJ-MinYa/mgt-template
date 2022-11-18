@@ -117,7 +117,7 @@
 </template>
 
 <script>
-/* eslint-disable */
+import showMsgboxMixin from '@/mixins/showMsgbox';
 import SearchFormItem from './components/searchFormItem.vue';
 import { sortBy, cloneDeep, isEmpty, pickBy } from 'lodash';
 import {
@@ -128,8 +128,10 @@ import {
     getFormItemProperty,
     defaultDatePickerWithSelectEnum,
 } from './index.js';
+
 export default {
     name: 'BaseTable',
+    mixins: [showMsgboxMixin],
     components: {
         SearchFormItem,
     },
@@ -200,7 +202,7 @@ export default {
                 this.tableColumns = this.addSerialNumberToColumns(val);
                 this.tableColumns = this.addConfigToColumns(this.tableColumns);
                 this.initialFormValue();
-                this.requestRemoteSelect();
+                this.initSelectRemoteMethod();
             },
         },
         data: {
@@ -305,14 +307,14 @@ export default {
             this.searchForm = cloneDeep(this.searchForm);
         },
         /** 处理select远程搜索 */
-        requestRemoteSelect() {
+        initSelectRemoteMethod() {
             /** 获取需要进行远程搜索的select */
-            const needRemoteArr = this.tableColumns.filter((item) => {
-                return item.searchType === 'select' && item.searchConfig && typeof item.searchConfig.selectEnumFun === 'function';
+            const needRemoteMethodArr = this.tableColumns.filter((item) => {
+                return item.searchType === 'select' && item.searchConfig && typeof item.searchConfig.remoteMethod === 'function';
             });
 
-            Promise.all(needRemoteArr.map((item) => item.searchConfig.selectEnumFun())).then((result) => {
-                result.forEach((res, index) => (needRemoteArr[index].searchConfig.selectEnum = res));
+            Promise.all(needRemoteMethodArr.map((item) => item.searchConfig.remoteMethod())).then((result) => {
+                result.forEach((res, index) => (needRemoteMethodArr[index].searchConfig.selectEnum = res));
             });
         },
         initPageParams(initCurrentPage = false) {

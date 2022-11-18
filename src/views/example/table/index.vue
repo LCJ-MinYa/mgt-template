@@ -18,12 +18,20 @@
                 <i class="el-icon-time pr-5" />
                 <span>{{ text }}</span>
             </template>
+            <el-row slot="action" slot-scope="{ row }">
+                <el-col>
+                    <el-button type="text">编辑</el-button>
+                </el-col>
+                <el-col>
+                    <el-button type="text" class="danger" @click="handleDelete(row)">删除</el-button>
+                </el-col>
+            </el-row>
         </base-table>
     </base-container>
 </template>
 
 <script>
-import { getList } from '@/api/table';
+import { getList, deleteTableItem } from '@/api/table';
 import { getSelect1Enum } from '@/api/enum';
 
 export default {
@@ -101,8 +109,8 @@ export default {
                         selectValue: 'select1Value',
                         selectEnum: [],
                         /** 带参数与不带参数 */
-                        // selectEnumFun: this.getSelect1Enum,
-                        selectEnumFun: () => this.getSelect1Enum({ test: 1 }),
+                        // remoteMethod: this.getSelect1Enum,
+                        remoteMethod: () => this.getSelect1Enum({ test: 1 }),
                     },
                 },
                 {
@@ -153,12 +161,30 @@ export default {
                         dateConfig: ['auditDateStart', 'auditDateEnd'],
                     },
                 },
+                {
+                    label: '操作',
+                    fixed: 'right',
+                    width: 160,
+                    slotName: 'action',
+                },
             ],
         };
     },
     methods: {
         getList,
         getSelect1Enum,
+        handleDelete(row) {
+            /** 删除成功示例 */
+            this.$refs.table.showMsgbox({
+                remoteMethod: () => deleteTableItem({ id: row.id }),
+                label: '删除',
+            });
+            /** 删除失败示例 */
+            // this.$refs.table.showMsgbox({
+            //     remoteMethod: () => deleteTableItem(),
+            //     label: '删除',
+            // });
+        },
     },
 };
 </script>

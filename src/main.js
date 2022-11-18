@@ -37,6 +37,14 @@ ElementUI.Card.props.shadow = {
     type: String,
     default: 'never',
 };
+ElementUI.Row.props.type = {
+    type: String,
+    default: 'flex',
+};
+ElementUI.Row.props.justify = {
+    type: String,
+    default: 'center',
+};
 
 Vue.use(ElementUI);
 Vue.use(AutoImportComponents);

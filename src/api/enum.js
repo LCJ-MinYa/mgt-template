@@ -1,9 +1,5 @@
-import request from '@/utils/request';
+import { METHOD, request } from '@/utils/request';
 
 export function getSelect1Enum(params) {
-    return request({
-        url: '/vue-admin-template/enum/select1',
-        method: 'post',
-        params,
-    });
+    return request('/enum/select1', METHOD.POST, params);
 }

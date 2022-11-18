@@ -2,7 +2,7 @@ const Mock = require('mockjs');
 
 module.exports = [
     {
-        url: '/vue-admin-template/enum/select1',
+        url: '/mgt-template/enum/select1',
         type: 'post',
         response: (config) => {
             const select1 = [

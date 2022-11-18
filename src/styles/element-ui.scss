@@ -71,3 +71,8 @@
 .table-header-cell {
     background: #fafafa;
 }
+
+/* button在type=text状态下危险颜色 */
+.el-button.el-button--text.danger {
+    color: #f56c6c;
+}
