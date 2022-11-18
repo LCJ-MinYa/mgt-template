@@ -76,7 +76,12 @@
 </template>
 
 <script>
-import { DATE_ALIAS, getFormItemProperty, switchDate, defaultDatePickerWithSelectEnum } from '@/components/AutoImport/BaseTable/index.js';
+import {
+    DATE_ALIAS,
+    getSearchFormItemProperty as getFormItemProperty,
+    switchDate,
+    defaultDatePickerWithSelectEnum,
+} from '@/components/AutoImport/BaseTable/index.js';
 
 export default {
     name: 'FormItem',

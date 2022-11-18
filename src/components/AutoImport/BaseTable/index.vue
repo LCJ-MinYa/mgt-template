@@ -125,7 +125,7 @@ import {
     props,
     computedSearchConfigParams,
     computedGoOtherPageConfigParams,
-    getFormItemProperty,
+    getSearchFormItemProperty as getFormItemProperty,
     defaultDatePickerWithSelectEnum,
 } from './index.js';
 

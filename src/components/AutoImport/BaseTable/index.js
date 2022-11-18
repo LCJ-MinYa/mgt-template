@@ -139,6 +139,11 @@ const computedGoOtherPageConfigParams = (goOtherPageConfig) => {
     );
 };
 
+/** 获取搜索表单属性最终值 */
+const getSearchFormItemProperty = (item, property = 'prop') => {
+    return item.searchConfig && item.searchConfig[property] ? item.searchConfig[property] : item[property] ? item[property] : null;
+};
+
 /** 获取表单属性最终值 */
 const getFormItemProperty = (item, property = 'prop') => {
     return item.searchConfig && item.searchConfig[property] ? item.searchConfig[property] : item[property] ? item[property] : null;
@@ -200,6 +205,7 @@ export {
     props,
     computedSearchConfigParams,
     computedGoOtherPageConfigParams,
+    getSearchFormItemProperty,
     getFormItemProperty,
     switchDate,
     defaultDatePickerWithSelectEnum,
