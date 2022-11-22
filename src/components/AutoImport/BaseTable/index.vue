@@ -18,6 +18,7 @@
                             :label-width="getFormItemProperty(item, 'labelWidth') || searchConfigParams.labelWidth"
                         >
                             <search-form-item
+                                type="table"
                                 :item="item"
                                 :form="searchForm"
                                 :isFirstItem="index === 0 && searchFirstLine === 1"
@@ -43,7 +44,7 @@
                     :prop="getFormItemProperty(item)"
                     :label-width="getFormItemProperty(item, 'labelWidth') || searchConfigParams.labelWidth"
                 >
-                    <search-form-item :item="item" :form="searchForm" />
+                    <search-form-item type="table" :item="item" :form="searchForm" />
                 </el-form-item>
             </el-form>
         </el-card>

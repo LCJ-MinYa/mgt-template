@@ -86,6 +86,14 @@ import {
 export default {
     name: 'FormItem',
     props: {
+        /**
+         * table 表格搜索上的searchForm
+         * form 单独表单上的form
+         */
+        type: {
+            type: String,
+            default: 'table',
+        },
         isFirstItem: {
             type: Boolean,
             default: false,

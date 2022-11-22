@@ -28,7 +28,7 @@ module.exports = [
         url: '/mgt-template/user/login',
         type: 'post',
         response: (config) => {
-            const { username } = config.body;
+            const { username } = config.query;
             const token = tokens[username];
 
             // mock error

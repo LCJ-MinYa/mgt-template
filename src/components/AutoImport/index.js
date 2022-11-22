@@ -2,6 +2,7 @@ import BaseTable from '@/components/AutoImport/BaseTable/index.vue';
 import BaseForm from '@/components/AutoImport/BaseForm/index.vue';
 import BaseContainer from '@/components/AutoImport/BaseContainer/index.vue';
 import BaseMain from '@/components/AutoImport/BaseMain/index.vue';
+import BaseFooter from '@/components/AutoImport/BaseFooter/index.vue';
 
 export default {
     install(Vue) {
@@ -9,5 +10,6 @@ export default {
         Vue.component('BaseForm', BaseForm);
         Vue.component('BaseContainer', BaseContainer);
         Vue.component('BaseMain', BaseMain);
+        Vue.component('BaseFooter', BaseFooter);
     },
 };

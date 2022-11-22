@@ -144,11 +144,6 @@ const getSearchFormItemProperty = (item, property = 'prop') => {
     return item.searchConfig && item.searchConfig[property] ? item.searchConfig[property] : item[property] ? item[property] : null;
 };
 
-/** 获取表单属性最终值 */
-const getFormItemProperty = (item, property = 'prop') => {
-    return item.searchConfig && item.searchConfig[property] ? item.searchConfig[property] : item[property] ? item[property] : null;
-};
-
 const switchDate = (value) => {
     let dateValue = [];
 
@@ -206,7 +201,6 @@ export {
     computedSearchConfigParams,
     computedGoOtherPageConfigParams,
     getSearchFormItemProperty,
-    getFormItemProperty,
     switchDate,
     defaultDatePickerWithSelectEnum,
 };
