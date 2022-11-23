@@ -58,6 +58,11 @@ export default {
                     searchConfig: {
                         labelWidth: '80px',
                     },
+                    componentConfig: {
+                        maxlength: 10,
+                        placeholder: '请输入标题',
+                        clearable: true,
+                    },
                 },
                 {
                     label: '作者',
@@ -90,6 +95,9 @@ export default {
                             },
                         ],
                     },
+                    componentConfig: {
+                        placeholder: '请选择作者',
+                    },
                 },
                 {
                     label: '查看数量',
@@ -111,6 +119,9 @@ export default {
                         /** 带参数与不带参数 */
                         // remoteMethod: this.getSelect1Enum,
                         remoteMethod: () => this.getSelect1Enum({ test: 1 }),
+                    },
+                    componentConfig: {
+                        clearable: true,
                     },
                 },
                 {

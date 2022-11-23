@@ -4,21 +4,19 @@
 <template>
     <!-- input 输入框 -->
     <el-input
-        v-if="item.searchType === 'input'"
+        v-if="getComponentType === 'input'"
         v-model="form[getFormItemProperty(item)]"
         autocomplete="off"
-        style="width: 200px;"
-        placeholder="请输入"
+        :placeholder="item.componentConfig && item.componentConfig.placeholder || '请输入'"
         v-bind="doBindComponentConfig(item)"
     />
 
     <!-- select 选择框 -->
     <el-select
-        v-else-if="item.searchType === 'select'"
+        v-else-if="getComponentType === 'select'"
         v-model="form[getFormItemProperty(item)]"
-        clearable
-        placeholder="请选择"
         v-bind="doBindComponentConfig(item)"
+        :placeholder="item.componentConfig && item.componentConfig.placeholder || '请选择'"
     >
         <el-option
             v-for="selectItem in item.searchConfig && item.searchConfig.selectEnum || []"
@@ -29,7 +27,7 @@
     </el-select>
 
     <!-- datePicker 时间选择框 -->
-    <el-form-item v-else-if="item.searchType === 'datePicker'" :prop="getFormItemProperty(item)">
+    <el-form-item v-else-if="getComponentType === 'datePicker'" :prop="getFormItemProperty(item)">
         <el-date-picker
             v-model="form[getFormItemProperty(item)]"
             type="daterange"
@@ -42,7 +40,7 @@
     </el-form-item>
 
     <!-- datePickerWithSelect 时间选择框带下拉选择项, 目前BaseTable独享 -->
-    <span v-else-if="item.searchType === 'datePickerWithSelect'">
+    <span v-else-if="getComponentType === 'datePickerWithSelect'">
         <el-form-item style="margin-right: 0;" :prop="`${getFormItemProperty(item)}${DATE_ALIAS}`">
             <el-select
                 v-model="form[`${getFormItemProperty(item)}${DATE_ALIAS}`]"
@@ -76,12 +74,9 @@
 </template>
 
 <script>
-import {
-    DATE_ALIAS,
-    getSearchFormItemProperty as getFormItemProperty,
-    switchDate,
-    defaultDatePickerWithSelectEnum,
-} from '@/components/AutoImport/BaseTable/index.js';
+import { DATE_ALIAS, getSearchFormItemProperty, switchDate, defaultDatePickerWithSelectEnum } from '@/components/AutoImport/BaseTable/index.js';
+
+import { getValidateFormItemProperty } from '@/components/AutoImport/BaseForm/index.js';
 
 export default {
     name: 'FormItem',
@@ -92,7 +87,7 @@ export default {
          */
         type: {
             type: String,
-            default: 'table',
+            default: 'form',
         },
         isFirstItem: {
             type: Boolean,
@@ -109,16 +104,37 @@ export default {
     },
     data() {
         return {
-            getFormItemProperty,
             DATE_ALIAS,
             defaultDatePickerWithSelectEnum,
         };
     },
+    computed: {
+        getFormItemProperty() {
+            switch (this.type) {
+                case 'table':
+                    return getSearchFormItemProperty;
+                case 'form':
+                    return getValidateFormItemProperty;
+                default:
+                    return getValidateFormItemProperty;
+            }
+        },
+        getComponentType() {
+            switch (this.type) {
+                case 'table':
+                    return this.item.searchType;
+                case 'form':
+                    return this.item.type;
+                default:
+                    return this.item.type;
+            }
+        },
+    },
     methods: {
         /** 设置组件属性 */
         doBindComponentConfig(item, defaultConfig = {}) {
-            let config = item.searchConfig && item.searchConfig.componentConfig;
-            /** 默认第一个组件宽度设置400px,其他200px */
+            let config = item.componentConfig;
+            /** 默认第一个组件宽度设置400px */
             if (this.isFirstItem) {
                 defaultConfig.style = {
                     width: '400px',
@@ -132,10 +148,10 @@ export default {
                 : defaultConfig;
         },
         changeDatePickerValue(value, item) {
-            this.form[getFormItemProperty(item)] = switchDate(value);
+            this.form[this.getFormItemProperty(item)] = switchDate(value);
         },
         datePickerSelectBlur(value, item) {
-            !value && this.$refs[`${getFormItemProperty(item)}${DATE_ALIAS}`].blur();
+            !value && this.$refs[`${this.getFormItemProperty(item)}${DATE_ALIAS}`].blur();
         },
     },
 };

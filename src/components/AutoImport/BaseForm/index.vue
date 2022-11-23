@@ -2,7 +2,13 @@
     <el-row>
         <el-col :span="span">
             <el-form ref="form" label-width="90px" v-bind="$props" v-on="$listeners">
-                <el-form-item v-for="item in formConfig" :key="item.prop" v-bind="{...item}">
+                <el-form-item
+                    v-for="item in formConfig"
+                    :key="item.prop"
+                    :label="item.label"
+                    :prop="item.prop"
+                    v-bind="item.formItemConfig ? {...item.formItemConfig} : {}"
+                >
                     <form-item-component type="form" :item="item" :form="model" />
                 </el-form-item>
             </el-form>
@@ -12,7 +18,7 @@
 
 <script>
 import FormItemComponent from '@/components/AutoImport/components/formItem.vue';
-import { props, getFormItemProperty } from './index.js';
+import { props, getValidateFormItemProperty as getFormItemProperty } from './index.js';
 
 export default {
     name: 'BaseForm',
@@ -21,6 +27,7 @@ export default {
     },
     props,
     data() {
+        console.log(this);
         return {};
     },
     computed: {

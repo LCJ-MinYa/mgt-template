@@ -11,16 +11,17 @@
 export default {
     data() {
         return {
-            form: {},
+            form: {
+                title: '',
+            },
             formConfig: [
-                [
-                    {
-                        label: '标题',
-                        prop: 'title',
-                        type: 'input',
-                        componentConfig: {},
-                    },
-                ],
+                {
+                    label: '标题',
+                    prop: 'title',
+                    type: 'input',
+                    formItemConfig: {},
+                    componentConfig: {},
+                },
             ],
         };
     },

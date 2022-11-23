@@ -17,8 +17,8 @@ const props = {
 };
 
 /** 获取表单属性最终值 */
-const getFormItemProperty = (item, property = 'prop') => {
-    return item.componentConfig && item.componentConfig[property] ? item.componentConfig[property] : item[property] ? item[property] : null;
+const getValidateFormItemProperty = (item) => {
+    return item.prop;
 };
 
-export { props, getFormItemProperty };
+export { props, getValidateFormItemProperty };
