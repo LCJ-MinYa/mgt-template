@@ -13,7 +13,8 @@
             </el-form-item>
             <!--此处的el-form-item只是为了显示label才添加的-->
             <el-form-item label="活动时间" prop="date">
-                <custom v-model="form.date"></custom>
+                <!--triggerValidate是为了让内部自定义组件的修改也可以触发date的校验，如果不加triggerValidate则只有在提交表单时才会验证date-->
+                <custom v-model="form.date" @triggerValidate="triggerValidate"></custom>
             </el-form-item>
         </el-form>
         <el-button type="primary" @click="submit">提交</el-button>
@@ -67,6 +68,9 @@ export default {
             this.$refs.form.validate((valid) => {
                 console.log(valid);
             });
+        },
+        triggerValidate() {
+            this.$refs.form.validateField('date');
         },
     },
 };
