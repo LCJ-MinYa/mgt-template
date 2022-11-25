@@ -12,7 +12,7 @@
                 </el-select>
             </el-form-item>
             <!--此处的el-form-item只是为了显示label才添加的-->
-            <el-form-item label="活动时间">
+            <el-form-item label="活动时间" required>
                 <!-- 需要传递prop对象名称，以便子组件内绑定校验规则时使用 -->
                 <custom v-model="form.date" propName="date"></custom>
             </el-form-item>

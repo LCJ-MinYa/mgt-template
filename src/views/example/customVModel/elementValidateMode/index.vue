@@ -1,6 +1,6 @@
 <!-- element ui中使用 -->
 <template>
-    <el-card header="使用element组件自定义vmodel对象，并集成element-ui-form校验">
+    <el-card header="使用element组件自定义vmodel对象，并集成element-ui-form将整个字段一起校验">
         <el-form ref="form" :model="form" :rules="rules" label-width="90px">
             <el-form-item label="活动名称" prop="name">
                 <el-input placeholder="请输入活动名称" v-model="form.name"></el-input>
@@ -12,9 +12,8 @@
                 </el-select>
             </el-form-item>
             <!--此处的el-form-item只是为了显示label才添加的-->
-            <el-form-item label="活动时间" required>
-                <!-- 需要传递prop对象名称，以便子组件内绑定校验规则时使用 -->
-                <custom v-model="form.date" propName="date"></custom>
+            <el-form-item label="活动时间" prop="date">
+                <custom v-model="form.date"></custom>
             </el-form-item>
         </el-form>
         <el-button type="primary" @click="submit">提交</el-button>
@@ -42,8 +41,20 @@ export default {
             rules: {
                 name: [{ required: true, message: '请输入活动名称', trigger: 'blur' }],
                 region: [{ required: true, message: '请选择活动区域', trigger: 'change' }],
-                'date.options': [{ required: true, message: '请选择日期1' }],
-                'date.range': [{ required: true, message: '请选择日期2' }],
+                date: [
+                    {
+                        validator: (rule, value, callback) => {
+                            console.log(rule, value, callback);
+                            if (!value.options) {
+                                callback(new Error('请选择日期1'));
+                            }
+                            if (!value.range || !value.range.length) {
+                                callback(new Error('请选择日期2'));
+                            }
+                            callback();
+                        },
+                    },
+                ],
             },
         };
     },
