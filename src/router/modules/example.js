@@ -82,6 +82,12 @@ const exampleRouter = {
                 },
             ],
         },
+        {
+            path: 'customVModel',
+            name: 'CustomVModel',
+            component: () => import('@/views/example/customVModel/index'),
+            meta: { title: '自定义组件vmodel对象' },
+        },
     ],
 };
 
