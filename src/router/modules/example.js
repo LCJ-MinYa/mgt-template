@@ -88,6 +88,12 @@ const exampleRouter = {
             component: () => import('@/views/example/customVModel/index'),
             meta: { title: '自定义组件vmodel对象' },
         },
+        {
+            path: 'exampleKey',
+            name: 'ExampleKey',
+            component: () => import('@/views/example/exampleKey/index'),
+            meta: { title: 'vue中key关键字' },
+        },
     ],
 };
 
