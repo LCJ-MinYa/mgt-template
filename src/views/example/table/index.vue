@@ -9,23 +9,20 @@
             :columns="columns"
             :data="dataSource"
         >
-            <el-tag
-                slot="status"
-                slot-scope="{ row }"
-                :type="row.status | statusFilter"
-            >{{ row.status }}</el-tag>
+            <template slot="status" slot-scope="{ row }">
+                <el-tag :type="row.status | statusFilter">{{ row.status }}</el-tag>
+            </template>
             <template slot="display_time" slot-scope="{ text }">
                 <i class="el-icon-time pr-5" />
                 <span>{{ text }}</span>
             </template>
-            <el-row slot="action" slot-scope="{ row }">
-                <el-col>
+            <template slot="action" slot-scope="{ row }">
+                <div class="action-btn-box">
                     <el-button type="text">编辑</el-button>
-                </el-col>
-                <el-col>
+                    <el-button type="text" @click="openDialog(row)">详情</el-button>
                     <el-button type="text" class="danger" @click="handleDelete(row)">删除</el-button>
-                </el-col>
-            </el-row>
+                </div>
+            </template>
         </base-table>
     </base-container>
 </template>
@@ -33,6 +30,7 @@
 <script>
 import { getList, deleteTableItem } from '@/api/table';
 import { getSelect1Enum } from '@/api/enum';
+import DetailDialog from './components/detailDialog.vue';
 
 export default {
     filters: {
@@ -175,7 +173,7 @@ export default {
                 {
                     label: '操作',
                     fixed: 'right',
-                    width: 160,
+                    width: 200,
                     slotName: 'action',
                 },
             ],
@@ -196,6 +194,28 @@ export default {
             //     label: '删除',
             // });
         },
+        openDialog(row) {
+            this.$dialog(DetailDialog, {
+                title: '查看详情',
+                width: '40%',
+                confirmButtonText: '确认',
+                cancelButtonText: '关闭',
+                props: {
+                    row: { ...row },
+                    success: () => {
+                        console.log('点击确认按钮后成功回调');
+                    },
+                },
+            });
+        },
     },
 };
 </script>
+
+<style lang="scss" scoped>
+.action-btn-box {
+    .el-button.is-round {
+        padding: 12px 5px;
+    }
+}
+</style>
