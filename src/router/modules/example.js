@@ -94,6 +94,12 @@ const exampleRouter = {
             component: () => import('@/views/example/exampleKey/index'),
             meta: { title: 'vue中key关键字' },
         },
+        {
+          path: 'reg',
+          name: 'Reg',
+          component: () => import('@/views/example/reg/index'),
+          meta: { title: '正则表达式' },
+      },
     ],
 };
 
