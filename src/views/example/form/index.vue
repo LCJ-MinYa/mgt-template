@@ -1,7 +1,7 @@
 <template>
     <base-container>
         <base-main>
-            <base-form :model="form" :formConfig="formConfig" :span="24" />
+            <base-form :model="form" :formConfig="formConfig" :span="12" />
         </base-main>
         <base-footer showGoBack />
     </base-container>
@@ -28,7 +28,7 @@ export default {
                         label: '标题1',
                         prop: 'title1',
                         type: 'input',
-                        span: 4,
+                        span: 16,
                         formItemConfig: {},
                         componentConfig: {},
                     },

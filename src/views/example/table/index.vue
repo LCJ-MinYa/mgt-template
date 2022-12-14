@@ -18,8 +18,8 @@
             </template>
             <template slot="action" slot-scope="{ row }">
                 <div class="action-btn-box">
-                    <el-button type="text">编辑</el-button>
-                    <el-button type="text" @click="openDialog(row)">详情</el-button>
+                    <el-button type="text" @click="openDrawer(row)">抽屉</el-button>
+                    <el-button type="text" @click="openDialog(row)">弹窗</el-button>
                     <el-button type="text" class="danger" @click="handleDelete(row)">删除</el-button>
                 </div>
             </template>
@@ -31,6 +31,7 @@
 import { getList, deleteTableItem } from '@/api/table';
 import { getSelect1Enum } from '@/api/enum';
 import DetailDialog from './components/detailDialog.vue';
+import DetailDrawer from './components/detailDrawer.vue';
 
 export default {
     filters: {
@@ -200,6 +201,19 @@ export default {
                 width: '40%',
                 confirmButtonText: '确认',
                 cancelButtonText: '关闭',
+                props: {
+                    row: { ...row },
+                    success: () => {
+                        console.log('点击确认按钮后成功回调');
+                    },
+                },
+            });
+        },
+        openDrawer(row) {
+            this.$drawer(DetailDrawer, {
+                title: '测试抽屉',
+                withHeader: true,
+                size: '50%',
                 props: {
                     row: { ...row },
                     success: () => {
