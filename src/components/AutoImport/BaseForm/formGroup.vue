@@ -1,17 +1,21 @@
 <template>
-    <el-card class="mb-20">
-        <el-row type="flex" justify="start" v-for="item in formGroupConfig" :key="item.prop">
-            <el-col :span="item.span || span">
-                <el-form-item
-                    :label="item.label"
-                    :prop="item.prop"
-                    v-bind="item.formItemConfig ? {...item.formItemConfig} : {}"
-                >
-                    <form-item-component type="form" :item="item" :form="form" />
-                </el-form-item>
-            </el-col>
-        </el-row>
-    </el-card>
+    <el-col :span="formGroupConfig.span || span">
+        <el-card class="mb-20">
+            <el-form-item
+                v-for="item in formGroupConfig.groupConfig"
+                :key="item.prop"
+                :label="item.label"
+                :prop="item.prop"
+                v-bind="item.formItemConfig ? {...item.formItemConfig} : {}"
+            >
+                <el-row type="flex" justify="start">
+                    <el-col :span="item.span || span">
+                        <form-item-component type="form" :item="item" :form="model" />
+                    </el-col>
+                </el-row>
+            </el-form-item>
+        </el-card>
+    </el-col>
 </template>
 
 <script>
@@ -22,22 +26,13 @@ export default {
     components: {
         FormItemComponent,
     },
+    inject: ['span', 'model'],
     props: {
         formGroupConfig: {
-            type: Array,
+            type: Object,
             default: () => {
                 return [];
             },
-        },
-        form: {
-            type: Object,
-            default: () => {
-                return {};
-            },
-        },
-        span: {
-            type: Number,
-            default: 8,
         },
     },
     data() {

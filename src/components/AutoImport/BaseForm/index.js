@@ -12,7 +12,12 @@ const props = {
     /** form表单占据宽度 */
     span: {
         type: Number,
-        default: 8,
+        default: 24,
+    },
+    /** form表单labelWidth设置初始值 */
+    labelWidth: {
+        type: String,
+        default: '90px',
     },
 };
 
