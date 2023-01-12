@@ -1,15 +1,18 @@
+<template>
+    <base-container>
+        <base-main>
+            <slot></slot>
+            <slot name="otherSlotA"></slot>
+            <slot name="otherSlotB"></slot>
+        </base-main>
+        <base-footer showGoBack />
+    </base-container>
+</template>
+
 <script>
 export default {
     data() {
         return {};
-    },
-    render() {
-        return (
-            <baseContainer>
-                <baseMain>{this.$slots.default}</baseMain>
-                <baseFooter showGoBack />
-            </baseContainer>
-        );
     },
     mounted() {},
     methods: {},
