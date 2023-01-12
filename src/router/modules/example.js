@@ -95,11 +95,17 @@ const exampleRouter = {
             meta: { title: 'vue中key关键字' },
         },
         {
-          path: 'reg',
-          name: 'Reg',
-          component: () => import('@/views/example/reg/index'),
-          meta: { title: '正则表达式' },
-      },
+            path: 'reg',
+            name: 'Reg',
+            component: () => import('@/views/example/reg/index'),
+            meta: { title: '正则表达式' },
+        },
+        {
+            path: 'extend',
+            name: 'Extend',
+            component: () => import('@/views/example/extend/index'),
+            meta: { title: '模板继承' },
+        },
     ],
 };
 
