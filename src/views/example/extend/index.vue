@@ -1,17 +1,21 @@
 <script>
-import BaseClassDemo from './baseClass.vue';
-import RenderMixin from './renderMixin';
+import RenderMixin from './mixin/renderMixin';
+import OthenSlotB from './components/othenSlotB.vue';
 
 export default {
-    extends: BaseClassDemo,
     mixins: [RenderMixin],
     data() {
-        return {};
+        return {
+            a: 1234569898,
+        };
     },
     mounted() {},
     methods: {
         renderDefault() {
             return <elCard class="mb-20">子类自定义slot</elCard>;
+        },
+        renderOtherSlotB() {
+            return <OthenSlotB a={this.a} />;
         },
     },
 };

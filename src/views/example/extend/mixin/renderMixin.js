@@ -1,4 +1,7 @@
+import BaseClassDemo from '../class/baseClass.vue';
+
 export default {
+    extends: BaseClassDemo,
     render(h) {
         this.$slots.default = this.renderDefault();
         this.$slots.otherSlotA = this.renderOtherSlotA();

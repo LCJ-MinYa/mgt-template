@@ -11,8 +11,15 @@
 
 <script>
 export default {
+    provide() {
+        return {
+            baseClass: this,
+        };
+    },
     data() {
-        return {};
+        return {
+            b: 2,
+        };
     },
     mounted() {},
     methods: {},
