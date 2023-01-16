@@ -186,6 +186,10 @@
 
 /* 内边距 细粒度5px */
 
+.p-0 {
+    padding: 0px;
+}
+
 .p-5 {
     padding: 5px;
 }
@@ -200,6 +204,11 @@
 
 .p-20 {
     padding: 20px;
+}
+
+.px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .px-5 {
@@ -222,6 +231,11 @@
     padding-right: 20px;
 }
 
+.py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
 .py-5 {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -242,6 +256,10 @@
     padding-bottom: 20px;
 }
 
+.pt-0 {
+    padding-top: 0px;
+}
+
 .pt-5 {
     padding-top: 5px;
 }
@@ -256,6 +274,10 @@
 
 .pt-20 {
     padding-top: 20px;
+}
+
+.pr-0 {
+    padding-right: 0px;
 }
 
 .pr-5 {
@@ -274,6 +296,10 @@
     padding-right: 20px;
 }
 
+.pb-0 {
+    padding-bottom: 0px;
+}
+
 .pb-5 {
     padding-bottom: 5px;
 }
@@ -288,6 +314,10 @@
 
 .pb-20 {
     padding-bottom: 20px;
+}
+
+.pl-0 {
+    padding-left: 0px;
 }
 
 .pl-5 {
@@ -308,6 +338,10 @@
 
 /* 外边距 细粒度5px */
 
+.m-0 {
+    margin: 0px;
+}
+
 .m-5 {
     margin: 5px;
 }
@@ -322,6 +356,11 @@
 
 .m-20 {
     margin: 20px;
+}
+
+.mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .mx-5 {
@@ -344,6 +383,11 @@
     margin-right: 20px;
 }
 
+.my-0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 .my-5 {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -364,6 +408,10 @@
     margin-bottom: 20px;
 }
 
+.mt-0 {
+    margin-top: 0px;
+}
+
 .mt-5 {
     margin-top: 5px;
 }
@@ -378,6 +426,10 @@
 
 .mt-20 {
     margin-top: 20px;
+}
+
+.mr-0 {
+    margin-right: 0px;
 }
 
 .mr-5 {
@@ -396,6 +448,10 @@
     margin-right: 20px;
 }
 
+.mb-0 {
+    margin-bottom: 0px;
+}
+
 .mb-5 {
     margin-bottom: 5px;
 }
@@ -410,6 +466,10 @@
 
 .mb-20 {
     margin-bottom: 20px;
+}
+
+.ml-0 {
+    margin-left: 0px;
 }
 
 .ml-5 {
