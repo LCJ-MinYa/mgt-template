@@ -1,9 +1,5 @@
 const global = {
-    methods: {
-        handleCode(code, isExecute = false) {
-            return isExecute ? new Function(code)() : code;
-        },
-    },
+    methods: {},
 };
 
 export default global;

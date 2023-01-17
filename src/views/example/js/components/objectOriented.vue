@@ -1,10 +1,10 @@
 <template>
     <div>
-        <pre v-highlight>
-            <code class="javascript">{{ handleCode(handleNewObjCode) }}</code>
+        <pre v-highlight="handleNewObjCode">
+            <code class="javascript"></code>
         </pre>
-        <pre v-highlight>
-            <code class="javascript">{{ handleCode(handleNewObjWithFucCode) }}</code>
+        <pre v-highlight="handleNewObjWithFucCode">
+            <code class="javascript"></code>
         </pre>
     </div>
 </template>
