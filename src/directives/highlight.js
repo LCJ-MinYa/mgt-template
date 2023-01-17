@@ -7,14 +7,16 @@ export default {
     bind: function (el, binding) {
         /** 复制代码方法 */
         binding.copyCode = () => {
-            binding.clipboard = new clipboardJS(`.copy-code${binding.expression}`, {
+            const clipboard = new clipboardJS(`.copy-code${binding.expression}`, {
                 text: () => binding.value,
             });
-            binding.clipboard.on('success', () => {
+            clipboard.on('success', () => {
                 Vue.prototype.$message.success('复制成功');
+                clipboard.destroy();
             });
-            binding.clipboard.on('error', () => {
+            clipboard.on('error', () => {
                 Vue.prototype.$message.error('复制失败');
+                clipboard.destroy();
             });
         };
 
@@ -44,7 +46,6 @@ export default {
         el.querySelector('.execute-code').addEventListener('click', binding.executeCode);
     },
     unbind(el, binding) {
-        binding.clipboard.destroy();
         el.querySelector(`.copy-code${binding.expression}`).removeEventListener('click', binding.copyCode);
         el.querySelector('.execute-code').removeEventListener('click', binding.executeCode);
     },
