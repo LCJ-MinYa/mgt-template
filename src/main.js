@@ -15,6 +15,8 @@ import '@/icons'; // icon
 import '@/permission'; // permission control
 
 import AutoImportComponents from '@/components/AutoImport';
+import Directives from './directives';
+import GlobalMixin from './mixins/global';
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -48,6 +50,8 @@ ElementUI.Row.props.justify = {
 
 Vue.use(ElementUI);
 Vue.use(AutoImportComponents);
+Vue.use(Directives);
+Vue.mixin(GlobalMixin);
 
 Vue.config.productionTip = false;
 

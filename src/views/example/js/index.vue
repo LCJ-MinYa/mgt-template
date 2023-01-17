@@ -10,8 +10,9 @@
                     </el-menu>
                 </el-aside>
                 <el-main class="bg-white">
-                    <div v-if="menuIndex === 'object'">查看控制台输出{{ handleNewObj() }}{{ handleNewObjWithFuc() }}</div>
-                    <div v-if="menuIndex === 'event-bus'">2</div>
+                    <template v-for="item in menuList">
+                        <component :key="item.index" v-if="menuIndex === item.index" :is="item.index"></component>
+                    </template>
                 </el-main>
             </el-container>
         </base-main>
@@ -19,13 +20,20 @@
 </template>
 
 <script>
+import objectOriented from './components/objectOriented.vue';
+import eventBus from './components/eventBus.vue';
+
 export default {
+    components: {
+        objectOriented,
+        eventBus,
+    },
     data() {
         return {
-            menuIndex: 'object',
+            menuIndex: 'objectOriented',
             menuList: [
                 {
-                    index: 'object',
+                    index: 'objectOriented',
                     title: '面向对象',
                 },
                 {
@@ -41,32 +49,6 @@ export default {
             if (index !== this.menuIndex) {
                 this.menuIndex = index;
             }
-        },
-        /** object */
-        handleNewObj() {
-            function person(name) {
-                this.name = name;
-                this.logName = function () {
-                    console.log(this.name);
-                };
-            }
-
-            const xiaoming = new person('小明');
-            const xiaohong = new person('小红');
-            console.log(xiaoming.logName === xiaohong.logName);
-        },
-        handleNewObjWithFuc() {
-            function person(name) {
-                this.name = name;
-            }
-
-            person.prototype.logName = function () {
-                console.log(this.name);
-            };
-
-            const xiaoming = new person('小明');
-            const xiaohong = new person('小红');
-            console.log(xiaoming.logName === xiaohong.logName);
         },
     },
 };
