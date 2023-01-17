@@ -22,7 +22,7 @@ export default {
 
         /** 执行代码方法 */
         binding.executeCode = () => {
-            new Function(binding.value)();
+            typeof binding.value === 'string' ? new Function(binding.value)() : binding.value();
             Vue.prototype.$message.success('执行完毕，请根据代码查看对应输出');
         };
 
