@@ -107,10 +107,10 @@ const exampleRouter = {
             meta: { title: '模板继承' },
         },
         {
-            path: 'js',
-            name: 'Js',
-            component: () => import('@/views/example/js/index'),
-            meta: { title: 'javascript' },
+            path: 'code',
+            name: 'Code',
+            component: () => import('@/views/example/code/index'),
+            meta: { title: '代码演示' },
         },
     ],
 };

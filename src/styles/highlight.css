@@ -6,9 +6,6 @@ pre.code {
     font-size: 0;
     margin-bottom: 30px;
 }
-pre.code > code {
-    position: relative;
-}
 pre.code > code > div.btn-box {
     position: absolute;
     right: 10px;

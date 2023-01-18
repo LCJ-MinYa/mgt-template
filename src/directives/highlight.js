@@ -5,10 +5,12 @@ import Vue from 'vue';
 
 export default {
     bind: function (el, binding) {
+        const isStringCode = typeof binding.value === 'string';
+
         /** 复制代码方法 */
         binding.copyCode = () => {
             const clipboard = new clipboardJS(`.copy-code${binding.expression}`, {
-                text: () => binding.value,
+                text: () => (isStringCode ? binding.value : binding.value.toString()),
             });
             clipboard.on('success', () => {
                 Vue.prototype.$message.success('复制成功');
@@ -22,7 +24,7 @@ export default {
 
         /** 执行代码方法 */
         binding.executeCode = () => {
-            typeof binding.value === 'string' ? new Function(binding.value)() : binding.value();
+            isStringCode ? new Function(binding.value)() : binding.value();
             Vue.prototype.$message.success('执行完毕，请根据代码查看对应输出');
         };
 
