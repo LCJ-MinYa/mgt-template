@@ -55,6 +55,14 @@ module.exports = {
                 '@': resolve('src'),
             },
         },
+        /** 关闭打包压缩代码 */
+        optimization: {
+            minimize: false,
+            minimizer: [
+                //minimize可以设置true,
+                //然后可以这里参照TerserPlugin文档修改一些更细节的配置
+            ],
+        },
     },
     chainWebpack(config) {
         // it can improve the speed of the first screen, it is recommended to turn on preload
