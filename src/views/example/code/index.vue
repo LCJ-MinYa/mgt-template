@@ -30,6 +30,7 @@
 <script>
 import objectOriented from './components/frontend/objectOriented.vue';
 import eventBus from './components/frontend/eventBus.vue';
+import elDrawer from './components/frontend/elDrawer.vue';
 
 import sqlCommand from './components/sql/sqlCommand.vue';
 
@@ -37,6 +38,7 @@ export default {
     components: {
         objectOriented,
         eventBus,
+        elDrawer,
         sqlCommand,
     },
     data() {
@@ -54,6 +56,10 @@ export default {
                         {
                             index: 'event-bus',
                             title: '实现event-bus',
+                        },
+                        {
+                            index: 'elDrawer',
+                            title: 'drawer组件通过esc关闭问题',
                         },
                     ],
                 },

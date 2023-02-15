@@ -5,7 +5,9 @@ import Vue from 'vue';
 
 export default {
     bind: function (el, binding) {
+        const blocksNode = el.querySelectorAll('pre code');
         const isStringCode = typeof binding.value === 'string';
+        const isJavaScript = blocksNode[0].classList.contains('javascript');
 
         /** 复制代码方法 */
         binding.copyCode = () => {
@@ -31,7 +33,6 @@ export default {
         /** pre添加code样式 */
         el.classList.add('code');
 
-        const blocksNode = el.querySelectorAll('pre code');
         blocksNode[0].innerHTML = binding.value;
         blocksNode.forEach((block) => {
             hljs.highlightElement(block);
@@ -40,15 +41,15 @@ export default {
             /** 添加复制代码，执行代码功能 */
             block.innerHTML += `<div class="btn-box">
                 <button type="button" class="el-button el-button--text is-round copy-code${binding.expression}">复制代码</button>
-                <button type="button" class="el-button el-button--text is-round execute-code">执行代码</button>
+                ${isJavaScript ? '<button type="button" class="el-button el-button--text is-round execute-code">执行代码</button>' : ''}
             </div>`;
         });
 
         el.querySelector(`.copy-code${binding.expression}`).addEventListener('click', binding.copyCode);
-        el.querySelector('.execute-code').addEventListener('click', binding.executeCode);
+        el.querySelector('.execute-code') && el.querySelector('.execute-code').addEventListener('click', binding.executeCode);
     },
     unbind(el, binding) {
         el.querySelector(`.copy-code${binding.expression}`).removeEventListener('click', binding.copyCode);
-        el.querySelector('.execute-code').removeEventListener('click', binding.executeCode);
+        el.querySelector('.execute-code') && el.querySelector('.execute-code').removeEventListener('click', binding.executeCode);
     },
 };
